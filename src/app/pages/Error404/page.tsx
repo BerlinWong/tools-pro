@@ -1,9 +1,4 @@
-{
-  /*
-    Graphic from https://www.opendoodles.com/
-*/
-}
-export const Err404Page = () => {
+const Err404Page = () => {
   return (
     <div className="grid h-screen place-content-center bg-white dark:bg-gray-900 px-4">
       <div className="text-center">
