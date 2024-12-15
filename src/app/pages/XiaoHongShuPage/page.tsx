@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 // import ImageCanvas from "@/app/components/ImageCanvas/ImageCanvas";
+import Image from 'next/image';
 
 const XiaoHongShuPage = () => {
   const [inputUrl, setInputUrl] = useState("");
@@ -34,10 +35,9 @@ const XiaoHongShuPage = () => {
         console.log(articleDesc);
 
         const imageUrls = note.note.imageList.map(
-          (image: { urlDefault: string }) => image.urlDefault.replace("http://sns-webpic-qc.xhscdn.com/", "https://falling-morning-dc70.wzysws.workers.dev/")
+          (image: { urlDefault: string }) => image.urlDefault
         );
         setImageUrls(imageUrls);
-        console.log(imageUrls)
         localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
       })
       .catch((error) => {
@@ -129,11 +129,13 @@ const XiaoHongShuPage = () => {
       )}
       <div className="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 p-4">
         {imageUrls.map((url, index) => (
-          <img
+          <Image
             key={index}
             src={url}
             alt={`Image ${index + 1}`}
             className="w-full h-auto rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
+            width={500}
+            height={300}
             onClick={() => {
               const modal = document.createElement("div");
               modal.style.position = "fixed";
