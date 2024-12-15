@@ -34,7 +34,7 @@ const XiaoHongShuPage = () => {
         console.log(articleDesc);
 
         const imageUrls = note.note.imageList.map(
-          (image: { urlDefault: string }) => image.urlDefault
+          (image: { urlDefault: string }) => image.urlDefault.replace("https://sns-webpic-qc.xhscdn.com/", "https://falling-morning-dc70.wzysws.workers.dev/")
         );
         setImageUrls(imageUrls);
         localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
