@@ -3,46 +3,81 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 // import ImageCanvas from "@/app/components/ImageCanvas/ImageCanvas";
-import Image from 'next/image';
+import Image from "next/image";
+import { gsap } from "gsap"; // 导入GSAP
 
 const XiaoHongShuPage = () => {
   const [inputUrl, setInputUrl] = useState("");
   const [imageUrls, setImageUrls] = useState([]);
   const [articleTitle, setArticleTitle] = useState("");
   const [articleDesc, setArticleDesc] = useState("");
+  const [toastVisible, setToastVisible] = useState(false); // 添加状态管理 Toast 可见性
+
   const router = useRouter();
 
   const handleParse = () => {
-    const xhsUrl = encodeURIComponent(inputUrl);
-    fetch(`/api/XiaoHongShuPage?xhs_url=${xhsUrl}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const json_data = data.data;
-        const noteDetailMap = json_data.note.noteDetailMap;
-
-        const noteKey = Object.keys(noteDetailMap)[0];
-        const note = noteDetailMap[noteKey];
-        const articleTitle = note.note.title;
-        const articleDesc = note.note.desc;
-        setArticleTitle(articleTitle);
-        setArticleDesc(articleDesc);
-        console.log(articleTitle);
-        console.log(articleDesc);
-
-        const imageUrls = note.note.imageList.map(
-          (image: { urlDefault: string }) => image.urlDefault
-        );
-        setImageUrls(imageUrls);
-        localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
+    let xhsUrl = "";
+    if (inputUrl.startsWith("https://www.xiaohongshu.com/explore/")) {
+      console.log("1");
+      xhsUrl = encodeURIComponent(inputUrl);
+    } else if (inputUrl.includes("http://xhslink.com")) {
+      console.log("2");
+      const regex = /http:\/\/xhslink\.com\/a\/(\w+)/;
+      const match = inputUrl.match(regex);
+      console.log(match);
+      if (match) {
+        xhsUrl = encodeURIComponent(`${match[0]}`);
+      }
+    } else {
+      if (!toastVisible) {
+        setToastVisible(true);
+        gsap.fromTo(
+          ".toast",
+          { opacity: 0, x: -200 },
+          { opacity: 1, x: 0, duration: 1.5 }
+        ); // 添加GSAP动画
+        setTimeout(() => {
+          gsap.to(".toast", {
+            opacity: 0,
+            x: 200,
+            duration: 0.5,
+            onComplete: () => setToastVisible(false),
+          }); // 动画结束后隐藏Toast
+        }, 3000);
+      }
+    }
+    console.log(xhsUrl);
+    if (xhsUrl) {
+      fetch(`/api/XiaoHongShuPage?xhs_url=${xhsUrl}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          const json_data = data.data;
+          const noteDetailMap = json_data.note.noteDetailMap;
+
+          const noteKey = Object.keys(noteDetailMap)[0];
+          const note = noteDetailMap[noteKey];
+          const articleTitle = note.note.title;
+          const articleDesc = note.note.desc;
+          setArticleTitle(articleTitle);
+          setArticleDesc(articleDesc);
+          console.log(articleTitle);
+          console.log(articleDesc);
+
+          const imageUrls = note.note.imageList.map(
+            (image: { urlDefault: string }) => image.urlDefault
+          );
+          setImageUrls(imageUrls);
+          localStorage.setItem("imageUrls", JSON.stringify(imageUrls));
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }
   };
 
   const handleClear = () => {
@@ -75,7 +110,6 @@ const XiaoHongShuPage = () => {
         <div className="flex space-x-4">
           <a
             className="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
-            href="#"
             onClick={handleParse}
           >
             <span className="absolute inset-0 border border-emerald-600 group-active:border-emerald-500"></span>
@@ -95,6 +129,27 @@ const XiaoHongShuPage = () => {
           </a>
         </div>
       </div>
+      {toastVisible && (
+        <div className="toast fixed top-[100px] right-4 bg-white p-4 rounded-lg shadow-lg flex items-center space-x-2">
+          <svg
+            className="w-6 h-6 text-red-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+          <p className="text-gray-700 dark:text-gray-300">
+            请输入有效的小红书 URL
+          </p>
+        </div>
+      )}
 
       <div className="w-full max-w-2xl mt-4 p-4">
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
