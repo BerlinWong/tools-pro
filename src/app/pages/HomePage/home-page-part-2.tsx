@@ -1,5 +1,4 @@
 import React from "react";
-
 export const HomePageSecondPart = () => {
   return (
     <section className="overflow-hidden bg-gray-50 dark:bg-gray-900 dark:text-white sm:grid sm:grid-cols-2 sm:items-center h-screen">

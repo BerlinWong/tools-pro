@@ -3,7 +3,7 @@
 import "./globals.css";
 import "./styles/spinkit.min.css";
 import { ThemeProvider } from "./context/theme-context";
-import { ClerkContainer } from "./views/MainClerkPage/clerk-container";
+import { ClerkContainer } from "./pages/MainClerkPage/clerk-container";
 
 export default function RootLayout({
   children,

@@ -14,10 +14,10 @@ export const ClerkContainer = ({ children }: { children: React.ReactNode }) => {
     <ClerkProvider
       appearance={isDarkMode ? { baseTheme: dark } : { baseTheme: undefined }}
     >
-      <html lang="en">
+      <html lang="en" className="bg-[#efefef] dark:bg-gray-800">
         <body>
           <ClerkLoading>
-            <div className="h-screen w-screen flex flex-col items-center justify-center bg-[#efefef]">
+            <div className="h-screen w-screen flex flex-col items-center justify-center bg-[#efefef] dark:bg-[#575757]">
               <div className="sk-grid">
                 <div className="sk-grid-cube"></div>
                 <div className="sk-grid-cube"></div>
@@ -36,7 +36,7 @@ export const ClerkContainer = ({ children }: { children: React.ReactNode }) => {
             <header>
               <Navbar />
             </header>
-            <main>
+            <main className="mt-16">
               {/* <HomePageMain /> */}
               {children}
             </main>

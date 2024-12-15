@@ -8,7 +8,7 @@ import {
 } from "@radix-ui/react-navigation-menu";
 
 import { cn } from "@/lib/utils";
-
+import Link from "next/link";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Home, Info, PocketKnife, BotMessageSquare } from "lucide-react";
 import { DarkModeToggle } from "@/app/components/Navbar/dark-mode-toggle";
@@ -17,6 +17,7 @@ import { useTheme } from "@/app/context/theme-context";
 
 const Navbar = () => {
   const { isDarkMode } = useTheme();
+  // const router = useRouter();
   console.log(isDarkMode);
   return (
     <nav className="bg-white bg-opacity-50 backdrop-blur-md text-black dark:bg-gray-800 dark:bg-opacity-50 dark:backdrop-blur-md dark:text-white shadow-md min-h-[64px] flex items-center fixed top-0 left-0 right-0 z-50">
@@ -35,7 +36,7 @@ const Navbar = () => {
                 )}
               >
                 <Home className="w-5 h-5" />
-                <button>Prompts</button>
+                <Link href={"/pages/404"}>Prompts</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -46,7 +47,7 @@ const Navbar = () => {
                 )}
               >
                 <PocketKnife className="w-5 h-5" />
-                <button>工具箱</button>
+                <Link href={"/pages/XiaoHongShuPage"}>小红书解析</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
