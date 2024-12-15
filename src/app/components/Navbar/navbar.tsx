@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -12,21 +12,32 @@ import Link from "next/link";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Home, Info, PocketKnife, BotMessageSquare } from "lucide-react";
 import { DarkModeToggle } from "@/app/components/Navbar/dark-mode-toggle";
-import { useTheme } from "@/app/context/theme-context";
-// import { ThemeProvider } from "@/app/components/Theme/theme-provider";
 
 const Navbar = () => {
-  const { isDarkMode } = useTheme();
-  // const router = useRouter();
-  console.log(isDarkMode);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className="bg-white bg-opacity-50 backdrop-blur-md text-black dark:bg-gray-800 dark:bg-opacity-50 dark:backdrop-blur-md dark:text-white shadow-md min-h-[64px] flex items-center fixed top-0 left-0 right-0 z-50">
+    <nav className="w-screen bg-white bg-opacity-50 backdrop-blur-md text-black dark:bg-gray-800 dark:bg-opacity-50 dark:backdrop-blur-md dark:text-white shadow-md min-h-[64px] flex items-center fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         <h1 className="text-xl font-bold">
           <Link href={"/"}>Tools Pro</Link>
         </h1>
-        <NavigationMenu className="flex items-center justify-center">
-          <NavigationMenuList className="flex space-x-4 justify-center items-center">
+        <button
+          className="md:hidden text-black dark:text-white"
+          onClick={toggleMenu}
+        >
+          菜单
+        </button>
+        <NavigationMenu
+          className={`${
+            isMenuOpen ? "block" : "hidden"
+          } md:flex items-center justify-center`}
+        >
+          <NavigationMenuList className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 justify-center items-center">
             <NavigationMenuItem className="flex items-center justify-center">
               <DarkModeToggle />
             </NavigationMenuItem>
@@ -74,18 +85,8 @@ const Navbar = () => {
                 <button>关于</button>
               </NavigationMenuLink>
             </NavigationMenuItem>
-            {/* <NavigationMenuItem className="flex justify-center items-center">
-              <div className="flex items-center space-x-2 min-w-6">
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
-                <SignedOut>
-                  <SignInButton />
-                </SignedOut>
-              </div>
-            </NavigationMenuItem> */}
           </NavigationMenuList>
-          <div className="border-l border-gray-300 h-6 mx-3"></div>
+          <div className="border-l border-gray-300 h-6 mx-3 hidden md:block"></div>
           <div className="flex items-center space-x-2 min-w-6 w-[64px]">
             <div className="flex items-center space-x-2">
               <SignedIn>

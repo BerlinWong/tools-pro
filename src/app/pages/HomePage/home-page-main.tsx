@@ -101,7 +101,7 @@ const HomePageMain = () => {
   }, []);
 
   return (
-    <div className="h-full w-screen flex flex-col items-center justify-center bg-white dark:bg-gray-900">
+    <div className="h-full w-screen flex flex-col items-center justify-center bg-white dark:bg-gray-900 overflow-x-hidden">
       <div className="w-full flex flex-col items-center justify-center h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-900 dark:to-black relative">
         <img
           src="https://images.unsplash.com/photo-1460407903781-7bb9b9cd2fb5?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
