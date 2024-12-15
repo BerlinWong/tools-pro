@@ -51,10 +51,7 @@ const XiaoHongShuPage = () => {
       fetch(`/api/XiaoHongShuPage?xhs_url=${xhsUrl}`, {
         method: "GET",
         headers: {
-          "Content-Type": "text/plain",
-          "User-Agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0",
-          "Referer": "https://www.xiaohongshu.com",
+          "Content-Type": "application/json",
         },
       })
         .then((response) => response.json())

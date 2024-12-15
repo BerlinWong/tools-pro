@@ -13,18 +13,9 @@ export async function GET(req: NextRequest) {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
-        Referer: "https://www.xiaohongshu.com",
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        "Connection": "keep-alive",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
       },
     });
-
+    console.log(response.data);
     const $ = cheerio.load(response.data);
     const scriptTag = $("script")
       .filter(function (i, el) {
@@ -34,10 +25,7 @@ export async function GET(req: NextRequest) {
 
     if (!scriptTag) {
       console.log(response.data);
-      return NextResponse.json(
-        { message: response.data },
-        { status: 404 }
-      );
+      return NextResponse.json({ message: response.data }, { status: 404 });
     }
     console.log(response.data);
 
