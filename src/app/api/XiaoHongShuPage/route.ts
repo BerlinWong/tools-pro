@@ -13,6 +13,15 @@ export async function GET(req: NextRequest) {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
+        Referer: "https://www.xiaohongshu.com",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+        "Connection": "keep-alive",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
       },
     });
 
@@ -30,6 +39,7 @@ export async function GET(req: NextRequest) {
         { status: 404 }
       );
     }
+    console.log(response.data);
 
     const jsonStr = scriptTag.split("window.__INITIAL_STATE__=")[1];
     try {
