@@ -205,9 +205,11 @@ const XiaoHongShuPage = () => {
               modal.style.zIndex = "1000";
 
               const imgContainer = document.createElement("div");
-              imgContainer.style.maxWidth = "80%";
-              imgContainer.style.maxHeight = "80%";
-              imgContainer.style.objectFit = "contain";
+              imgContainer.style.width = "80%";
+              imgContainer.style.height = "80%";
+              imgContainer.style.display = "flex";
+              imgContainer.style.alignItems = "center";
+              imgContainer.style.justifyContent = "center";
 
               const imgElement = document.createElement("img");
               imgElement.src = url;
