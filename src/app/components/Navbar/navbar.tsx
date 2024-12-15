@@ -22,7 +22,9 @@ const Navbar = () => {
   return (
     <nav className="bg-white bg-opacity-50 backdrop-blur-md text-black dark:bg-gray-800 dark:bg-opacity-50 dark:backdrop-blur-md dark:text-white shadow-md min-h-[64px] flex items-center fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-        <h1 className="text-xl font-bold">Tools Pro</h1>
+        <h1 className="text-xl font-bold">
+          <Link href={"/"}>Tools Pro</Link>
+        </h1>
         <NavigationMenu className="flex items-center justify-center">
           <NavigationMenuList className="flex space-x-4 justify-center items-center">
             <NavigationMenuItem className="flex items-center justify-center">
