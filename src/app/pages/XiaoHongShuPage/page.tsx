@@ -26,7 +26,7 @@ const XiaoHongShuPage = () => {
       const match = inputUrl.match(regex);
       console.log(match);
       if (match) {
-        xhsUrl = encodeURIComponent(`${match[0]}`);
+        xhsUrl = match[0];
       }
     } else {
       if (!toastVisible) {
