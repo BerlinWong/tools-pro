@@ -11,13 +11,11 @@ export async function GET(req: NextRequest) {
   try {
     const response = await axios.get(xhs_url, {
       headers: {
-        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9 ",
-        "Host": "www.xiaohongshu.com",
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
       },
     });
-    console.log(response.data);
+
     const $ = cheerio.load(response.data);
     const scriptTag = $("script")
       .filter(function (i, el) {
@@ -26,10 +24,11 @@ export async function GET(req: NextRequest) {
       .html();
 
     if (!scriptTag) {
-      console.log(response.data);
-      return NextResponse.json({ message: response.data }, { status: 404 });
+      return NextResponse.json(
+        { message: "未找到包含JSON的script标签" },
+        { status: 404 }
+      );
     }
-    console.log(response.data);
 
     const jsonStr = scriptTag.split("window.__INITIAL_STATE__=")[1];
     try {
