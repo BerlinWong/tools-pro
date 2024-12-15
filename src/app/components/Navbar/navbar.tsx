@@ -36,7 +36,7 @@ const Navbar = () => {
                 )}
               >
                 <Home className="w-5 h-5" />
-                <Link href={"/pages/404"}>Prompts</Link>
+                <Link href={"/pages/Error404"}>Prompts</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>

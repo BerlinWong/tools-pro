@@ -20,7 +20,7 @@ export const HomePageThirdPart = () => {
 
           <div className="mt-4 md:mt-8">
             <a
-              href="#"
+              href={"/pages/XiaoHongShuPage"}
               className="inline-block rounded bg-emerald-600 dark:bg-emerald-700 px-12 py-3 text-sm font-medium text-white transition hover:bg-emerald-700 dark:hover:bg-emerald-800"
             >
               试试看
