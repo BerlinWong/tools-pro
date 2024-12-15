@@ -16,7 +16,7 @@ const XiaoHongShuPage = () => {
   const router = useRouter();
 
   const handleParse = () => {
-    let xhsUrl = "";
+    let xhsUrl = "http://xhslink.com/a/zi7JsYc9CnJ1";
     if (inputUrl.startsWith("https://www.xiaohongshu.com/explore/")) {
       console.log("1");
       xhsUrl = encodeURIComponent(inputUrl);
