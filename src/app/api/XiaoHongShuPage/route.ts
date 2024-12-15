@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
     if (!scriptTag) {
       console.log(response.data);
       return NextResponse.json(
-        { message: "未找到包含JSON的script标签" },
+        { message: response.data },
         { status: 404 }
       );
     }
