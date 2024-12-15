@@ -149,13 +149,20 @@ const XiaoHongShuPage = () => {
               modal.style.justifyContent = "center";
               modal.style.zIndex = "1000";
 
+              const imgContainer = document.createElement("div");
+              imgContainer.style.maxWidth = "80%";
+              imgContainer.style.maxHeight = "80%";
+              imgContainer.style.objectFit = "contain";
+
               const imgElement = document.createElement("img");
               imgElement.src = url;
-              imgElement.style.maxWidth = "80%";
-              imgElement.style.maxHeight = "80%";
+              imgElement.alt = `Image ${index + 1}`;
+              imgElement.style.maxWidth = "100%";
+              imgElement.style.maxHeight = "100%";
               imgElement.style.objectFit = "contain";
 
-              modal.appendChild(imgElement);
+              imgContainer.appendChild(imgElement);
+              modal.appendChild(imgContainer);
               modal.onclick = () => {
                 document.body.removeChild(modal);
               };

@@ -6,7 +6,6 @@ import { useTheme } from "@/app/context/theme-context";
 import { dark } from "@clerk/themes";
 import Navbar from "@/app/components/Navbar/navbar";
 
-
 export const ClerkContainer = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode } = useTheme();
   console.log(isDarkMode);
@@ -15,6 +14,9 @@ export const ClerkContainer = ({ children }: { children: React.ReactNode }) => {
       appearance={isDarkMode ? { baseTheme: dark } : { baseTheme: undefined }}
     >
       <html lang="en" className="bg-[#efefef] dark:bg-gray-800">
+        <header>
+          <meta name="referrer" content="no-referrer" />
+        </header>
         <body>
           <ClerkLoading>
             <div className="h-screen w-screen flex flex-col items-center justify-center bg-[#efefef] dark:bg-[#575757]">
